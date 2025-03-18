@@ -78,15 +78,12 @@ export async function getDamsData() {
         damsData[watershed].dams.push({ name: dam, ...data })
       }
     }
-
     fs.writeFileSync('damsData.json', JSON.stringify(damsData, null, 2))
-    console.log('Data saved to damsData.json')
+    return damsData
   } catch (error) {
     console.error('Error scraping data:', error)
   }
 }
-
-getDamsData()
 
 function fetchHtml(url: string): Promise<string> {
   return fetch(url).then((result) => result.text())
